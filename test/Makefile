@@ -15,6 +15,7 @@ $(TARGET): $(OBJ)
 	cc -o $@ $? $(LDFLAGS)
 
 obj/%.o: src/%.c
+	mkdir -p include
 	cp ../include/giganum.h ./include/
 	mkdir -p obj
 	cc -c $< -o $@ $(CFLAGS)

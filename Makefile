@@ -11,7 +11,7 @@ clean:
 	rm -f test/lib/*
 
 $(TARGET): $(OBJ)
-	mkdir -p lib
+	mkdir -p lib test/lib
 	cc -shared -o $@ $? $(LDFLAGS)
 	cp $(TARGET) test/$(TARGET)
 
