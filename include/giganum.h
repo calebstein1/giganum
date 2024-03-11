@@ -3,8 +3,10 @@
 
 #include <stdbool.h>
 
+#define MAX_DIGITS 256
+
 typedef struct {
-    char val[256];
+    char val[MAX_DIGITS];
     int ndigits;
     bool is_negative;
 } giganum_t;

@@ -19,7 +19,7 @@ giganum_t* giga_init(char* num_str) {
             printf("giganum string cannot contain non-digit characters\n");
             return NULL;
         }
-        if (i >= 256) {
+        if (i >= MAX_DIGITS) {
             printf("number too large\n");
             return NULL;
         }
