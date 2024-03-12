@@ -3,17 +3,19 @@ SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c, obj/%.o, $(SRC))
 CFLAGS=-Iinclude
 
-default: clean $(TARGET)
+default: clean $(TARGET) run-tests
 
 clean:
 	rm -f obj/*.o
 	rm -f lib/*
 	rm -f test/lib/*
 
+run-tests:
+	make -C ./test
+
 $(TARGET): $(OBJ)
-	mkdir -p lib test/lib
+	mkdir -p lib
 	cc -shared -o $@ $? $(LDFLAGS)
-	cp $(TARGET) test/$(TARGET)
 
 obj/%.o: src/%.c
 	mkdir -p obj

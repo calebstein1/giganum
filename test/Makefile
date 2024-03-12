@@ -1,8 +1,8 @@
 TARGET = bin/giganum_test
 SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c, obj/%.o, $(SRC))
-CFLAGS=-Iinclude
-LDFLAGS=-Llib -lgiganum
+CFLAGS=-I../include
+LDFLAGS=-L../lib -lgiganum
 
 default: clean $(TARGET) run-test
 
@@ -15,10 +15,10 @@ $(TARGET): $(OBJ)
 	cc -o $@ $? $(LDFLAGS)
 
 obj/%.o: src/%.c
-	mkdir -p include
-	cp ../include/giganum.h ./include/
 	mkdir -p obj
 	cc -c $< -o $@ $(CFLAGS)
 
 run-test:
-	LD_LIBRARY_PATH=lib bin/giganum_test
+	@echo "***RUNNING TESTS***\n"
+	LD_LIBRARY_PATH=../lib bin/giganum_test
+	@echo "\n***TESTS COMPLETED***"
