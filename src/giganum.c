@@ -7,12 +7,6 @@
 giganum_t* giga_init(char* num_str) {
     int i = 0;
     giganum_t* new_giganum;
-    bool is_negative = false;
-
-    if (num_str[0] == '-') {
-        is_negative = true;
-        i++;
-    }
 
     for (; num_str[i] != '\0'; i++) {
         if (num_str[i] < 0x30 || 0x39 < num_str[i]) {
@@ -29,8 +23,6 @@ giganum_t* giga_init(char* num_str) {
         perror("calloc");
         return NULL;
     }
-
-    new_giganum->is_negative = is_negative;
     new_giganum->ndigits = i;
     strncpy(new_giganum->val, num_str, i);
 

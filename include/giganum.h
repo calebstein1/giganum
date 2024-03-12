@@ -8,7 +8,6 @@
 typedef struct {
     char val[MAX_DIGITS];
     int ndigits;
-    bool is_negative;
 } giganum_t;
 
 giganum_t* giga_init(char* num_str);
