@@ -60,12 +60,11 @@ void giga_print(giganum_t *giganum) {
 }
 
 giganum_t* giga_add(giganum_t *a, giganum_t *b) {
-    int i = 0, a_pos, b_pos, carry, result_size = (a->ndigits > b->ndigits ? a->ndigits : b->ndigits) + 1;
+    int i, a_pos, b_pos, a_int, b_int, interim, carry, result_size = (a->ndigits > b->ndigits ? a->ndigits : b->ndigits) + 1;
     char result[result_size];
-    a_pos = b_pos = carry = 0;
+    i = a_pos = b_pos = carry = 0;
 
     while (a->val[a_pos] != '\0' || b->val[b_pos] != '\0') {
-        int a_int, b_int, interim;
         a_int = a->val[a_pos] != '\0' ? (int)(a->val[a_pos] - 0x30) : 0;
         b_int = b->val[b_pos] != '\0' ? (int)(b->val[b_pos] - 0x30) : 0;
 
