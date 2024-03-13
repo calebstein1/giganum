@@ -4,12 +4,12 @@
 #include "giganum.h"
 
 int main() {
-    giganum_t *my_giganum1 = giga_init("1654787323298409348728723982398742309842398723457265");
+    giganum_t *my_giganum1 = giga_init("18446744073709551615");
     if (my_giganum1 == NULL) {
         printf("Something went wrong bruh\n");
         return -1;
     }
-    giganum_t *my_giganum2 = giga_init("92346287628347628781298796875437256437428376422234259");
+    giganum_t *my_giganum2 = giga_init("1");
     if (my_giganum2 == NULL) {
         printf("Something went wrong bruh\n");
         return -1;
