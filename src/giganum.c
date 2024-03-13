@@ -4,7 +4,7 @@
 
 #include "giganum.h"
 
-giganum_t* giga_init(char* num_str) {
+giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     int i = 0;
     giganum_t* new_giganum;
     char* str_reversed;
@@ -26,24 +26,32 @@ giganum_t* giga_init(char* num_str) {
     }
     new_giganum->ndigits = i;
 
-    if ((str_reversed = calloc(new_giganum->ndigits, sizeof(char))) == NULL) {
-        perror("calloc");
-        return NULL;
-    }
+    if (!already_reversed) {
+        if ((str_reversed = calloc(new_giganum->ndigits, sizeof(char))) == NULL) {
+            perror("calloc");
+            return NULL;
+        }
 
-    for (; i > 0; i--) {
-        str_reversed[new_giganum->ndigits - i] = num_str[i - 1];
-    }
+        for (; i > 0; i--) {
+            str_reversed[new_giganum->ndigits - i] = num_str[i - 1];
+        }
 
-    strncpy(new_giganum->val, str_reversed, new_giganum->ndigits);
-    if (memcmp(new_giganum->val, str_reversed, new_giganum->ndigits) != 0) {
+        strncpy(new_giganum->val, str_reversed, new_giganum->ndigits);
+        if (memcmp(new_giganum->val, str_reversed, new_giganum->ndigits) != 0) {
+            free(str_reversed);
+
+            return NULL;
+        }
         free(str_reversed);
-
-        return NULL;
+    } else {
+        strncpy(new_giganum->val, num_str, new_giganum->ndigits);
     }
-    free(str_reversed);
 
     return new_giganum;
+}
+
+giganum_t* giga_init_args(init_args args) {
+    return giga_init_base(args.num_str, args.already_reversed ? args.already_reversed : false);
 }
 
 void giga_print(giganum_t *giganum) {
