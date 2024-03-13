@@ -45,6 +45,9 @@ giganum_t* giga_init_base(char* num_str, bool already_reversed) {
         free(str_reversed);
     } else {
         strncpy(new_giganum->val, num_str, new_giganum->ndigits);
+        if (memcmp(new_giganum->val, num_str, new_giganum->ndigits) != 0) {
+            return NULL;
+        }
     }
 
     return new_giganum;
