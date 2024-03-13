@@ -7,7 +7,6 @@
 giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     int i = 0;
     giganum_t* new_giganum;
-    char* str_reversed;
 
     for (; num_str[i] != '\0'; i++) {
         if (num_str[i] < 0x30 || 0x39 < num_str[i]) {
@@ -27,10 +26,7 @@ giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     new_giganum->ndigits = i;
 
     if (!already_reversed) {
-        if ((str_reversed = calloc(new_giganum->ndigits, sizeof(char))) == NULL) {
-            perror("calloc");
-            return NULL;
-        }
+        char str_reversed[new_giganum->ndigits];
 
         for (; i > 0; i--) {
             str_reversed[new_giganum->ndigits - i] = num_str[i - 1];
@@ -38,11 +34,8 @@ giganum_t* giga_init_base(char* num_str, bool already_reversed) {
 
         strncpy(new_giganum->val, str_reversed, new_giganum->ndigits);
         if (memcmp(new_giganum->val, str_reversed, new_giganum->ndigits) != 0) {
-            free(str_reversed);
-
             return NULL;
         }
-        free(str_reversed);
     } else {
         strncpy(new_giganum->val, num_str, new_giganum->ndigits);
         if (memcmp(new_giganum->val, num_str, new_giganum->ndigits) != 0) {
