@@ -65,4 +65,41 @@ void giga_print(giganum_t *giganum) {
     }
     printf("%s\n", str_reversed);
 }
+
+giganum_t* giga_add(giganum_t *a, giganum_t *b) {
+    int i = 0, a_pos, b_pos, carry, result_size = (a->ndigits > b->ndigits ? a->ndigits : b->ndigits) + 1;
+    char result[result_size];
+    a_pos = b_pos = carry = 0;
+
+    while (a->val[a_pos] != '\0' || b->val[b_pos] != '\0') {
+        int a_int, b_int, interim;
+        a_int = a->val[a_pos] != '\0' ? (int)(a->val[a_pos] - 0x30) : 0;
+        b_int = b->val[b_pos] != '\0' ? (int)(b->val[b_pos] - 0x30) : 0;
+
+        interim = a_int + b_int + carry;
+        if (carry == 1) {
+            carry = 0;
+        }
+        if (interim > 9) {
+            interim -= 10;
+            carry = 1;
+        }
+
+        result[i] = (char)(interim + 0x30);
+        i++;
+
+        if (i == result_size - 1 && carry == 1) {
+            result[result_size - 1] = 0x31;
+            break;
+        }
+
+        if (a->val[a_pos] != '\0') {
+            a_pos++;
+        }
+        if (b->val[b_pos] != '\0') {
+            b_pos++;
+        }
+    }
+
+    return giga_init(result, true)
 }
