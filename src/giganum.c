@@ -4,6 +4,13 @@
 
 #include "giganum.h"
 
+void reverse_str(char* str, char* val, int strlen) {
+    int i;
+    for (i = strlen; i > 0; i--) {
+        str[strlen - i] = val[i - 1];
+    }
+}
+
 giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     int i = 0;
     giganum_t* new_giganum;
@@ -28,9 +35,7 @@ giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     if (!already_reversed) {
         char str_reversed[new_giganum->ndigits];
 
-        for (; i > 0; i--) {
-            str_reversed[new_giganum->ndigits - i] = num_str[i - 1];
-        }
+        reverse_str(str_reversed, num_str, new_giganum->ndigits);
 
         strncpy(new_giganum->val, str_reversed, new_giganum->ndigits);
         if (memcmp(new_giganum->val, str_reversed, new_giganum->ndigits) != 0) {
@@ -52,10 +57,7 @@ giganum_t* giga_init_args(init_args args) {
 
 void giga_print(giganum_t *giganum) {
     char str_reversed[giganum->ndigits];
-    int i;
-    for (i = giganum->ndigits; i > 0; i--) {
-        str_reversed[giganum->ndigits - i] = giganum->val[i - 1];
-    }
+    reverse_str(str_reversed, giganum->val, giganum->ndigits);
     printf("%s\n", str_reversed);
 }
 
