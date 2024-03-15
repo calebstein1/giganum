@@ -11,6 +11,22 @@ void reverse_str(char* str, char* val, int strlen) {
     }
 }
 
+void eat_zeros(char* str, int strlen) {
+    int i = strlen - 1;
+    while (str[i] == 0x30) {
+        i--;
+    }
+    if (i < strlen - 1) {
+        str[i + 1] = 0x00;
+    } else {
+        return;
+    }
+    if (str[0] == 0x00) {
+        str[0] = 0x30;
+        str[1] = 0x00;
+    }
+}
+
 giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     int i = 0;
     giganum_t* new_giganum;
@@ -95,6 +111,42 @@ giganum_t* giga_add(giganum_t *a, giganum_t *b) {
             b_pos++;
         }
     }
+
+    return giga_init(result, true)
+}
+
+giganum_t* giga_subtract(giganum_t* a, giganum_t* b) {
+    int result_size = a->ndigits;
+
+    int i, a_pos, b_pos;
+    char result[result_size], interim, carry, shorter_finished;
+    i = a_pos = b_pos = 0;
+    carry = shorter_finished = 0x00;
+
+    while (a->val[a_pos] != '\0') {
+        if (b->val[b_pos] == '\0') {
+            shorter_finished = 0x30;
+        }
+        interim = (a->val[a_pos] + 0x30 - carry) - b->val[b_pos] - shorter_finished;
+        if (carry == 0x01) {
+            carry = 0x00;
+        }
+        if (interim < 0x30) {
+            interim += 0x0A;
+            carry = 0x01;
+        }
+
+        result[i] = interim;
+        i++;
+
+        if (a->val[a_pos] != '\0') {
+            a_pos++;
+        }
+        if (b->val[b_pos] != '\0') {
+            b_pos++;
+        }
+    }
+    eat_zeros(result, result_size);
 
     return giga_init(result, true)
 }

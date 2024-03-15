@@ -19,5 +19,6 @@ typedef struct {
 giganum_t* giga_init_args(init_args args);
 void giga_print(giganum_t* giganum);
 giganum_t* giga_add(giganum_t* a, giganum_t* b);
+giganum_t* giga_subtract(giganum_t* a, giganum_t* b);
 
 #endif //GIGANUM_GIGANUM_H

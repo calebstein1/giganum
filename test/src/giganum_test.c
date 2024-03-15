@@ -4,19 +4,19 @@
 #include "giganum.h"
 
 int main() {
-    giganum_t *my_giganum1 = giga_init("18446744073709551615");
+    giganum_t *my_giganum1 = giga_init("256");
     if (my_giganum1 == NULL) {
         printf("Something went wrong bruh\n");
         return -1;
     }
-    giganum_t *my_giganum2 = giga_init("1");
+    giganum_t *my_giganum2 = giga_init("247");
     if (my_giganum2 == NULL) {
         printf("Something went wrong bruh\n");
         return -1;
     }
 
     giganum_t* add_result = giga_add(my_giganum1, my_giganum2);
-    giga_print(add_result);
+    //giga_print(add_result);
 
     giganum_t* subtract_result = giga_subtract(my_giganum1, my_giganum2);
     giga_print(subtract_result);
