@@ -18,9 +18,13 @@ int main() {
     giganum_t* add_result = giga_add(my_giganum1, my_giganum2);
     giga_print(add_result);
 
+    giganum_t* subtract_result = giga_subtract(my_giganum1, my_giganum2);
+    giga_print(subtract_result);
+
     free(my_giganum1);
     free(my_giganum2);
     free(add_result);
+    free(subtract_result);
 
     return 0;
 }
