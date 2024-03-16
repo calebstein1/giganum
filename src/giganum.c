@@ -13,7 +13,7 @@ void reverse_str(char* str, char* val, int strlen) {
 
 void eat_zeros(char* str, int strlen) {
     int i = strlen - 1;
-    while (str[i] == 0x30) {
+    while (str[i] == 0x30 && i >= 0) {
         i--;
     }
     if (i < strlen - 1) {
