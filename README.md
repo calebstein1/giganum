@@ -4,7 +4,7 @@
 
 Giganum is a C library allowing for arithmetic operations on integers of an arbitrary size, unconstrained by the size limitations of standard number types.
 
-Right now the only implemented function is addition, and only positive numbers are supported, but more functions are coming soon!
+Right now the only implemented functions are addition and subtraction, and only positive numbers are supported, but more functions are coming soon!
 
 ## Building
 
@@ -47,11 +47,25 @@ giga_print(my_giganum);
 
 #### giga_add
 
-The `giga_add` function adds takes two `giganum_t` pointers, adds the values, and returns a pointer to a new `giganum_t` containing the summed value.
+The `giga_add` function takes two `giganum_t` pointers, adds the values, and returns a pointer to a new `giganum_t` containing the summed value.
 Remember that all of these pointers will need to be freed separately.
 
 ```C
 giganum_t* my_giganum1 = giga_init("123456789");
 giganum_t* my_giganum2 = giga_init("9876543210");
 giganum_t* sum_result = giga_add(my_giganum1, my_giganum2);
+```
+
+#### giga_subtract
+
+The `giga_subtract` function takes two `giganum_t` pointers, subtracts the second from the first, and returns a pointer to a new `giganum_t` containing the difference.
+The value of the second `giganum_t` but be less than or equal to the value of the first.
+Because negative values are not supported by libgiganum at all, having the second value larger than the first is considered undefined behavior.
+Don't do it.
+And as always, remember to free your pointers.
+
+```C
+giganum_t* my_giganum1 = giga_init("9876543210");
+giganum_t* my_giganum2 = giga_init("123456789");
+giganum_t* sum_result = giga_subtract(my_giganum1, my_giganum2);
 ```
