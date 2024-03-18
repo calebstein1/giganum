@@ -49,14 +49,7 @@ giganum_t* giga_init_base(char* num_str, bool already_reversed) {
     new_giganum->ndigits = i;
 
     if (!already_reversed) {
-        char str_reversed[new_giganum->ndigits];
-
-        reverse_str(str_reversed, num_str, new_giganum->ndigits);
-
-        strncpy(new_giganum->val, str_reversed, new_giganum->ndigits);
-        if (memcmp(new_giganum->val, str_reversed, new_giganum->ndigits) != 0) {
-            return NULL;
-        }
+        reverse_str(new_giganum->val, num_str, new_giganum->ndigits);
     } else {
         strncpy(new_giganum->val, num_str, new_giganum->ndigits);
         if (memcmp(new_giganum->val, num_str, new_giganum->ndigits) != 0) {
