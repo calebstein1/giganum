@@ -9,6 +9,7 @@ void reverse_str(char* str, char* val, int strlen) {
     for (i = strlen; i > 0; i--) {
         str[strlen - i] = val[i - 1];
     }
+    str[strlen] = '\0';
 }
 
 void eat_zeros(char* str, int strlen) {
