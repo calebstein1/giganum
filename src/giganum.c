@@ -142,6 +142,7 @@ giganum_t* giga_subtract(giganum_t* a, giganum_t* b) {
             b_pos++;
         }
     }
+    result[result_size] = '\0';
     eat_zeros(result, result_size);
 
     return giga_init(result, true)
