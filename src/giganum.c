@@ -95,6 +95,7 @@ giganum_t* giga_add(giganum_t *a, giganum_t *b) {
 
         if (i == result_size - 1 && carry == 0x01) {
             result[result_size - 1] = 0x31;
+            i++;
             break;
         }
 
@@ -105,6 +106,7 @@ giganum_t* giga_add(giganum_t *a, giganum_t *b) {
             b_pos++;
         }
     }
+    result[i] = '\0';
 
     return giga_init(result, true)
 }
